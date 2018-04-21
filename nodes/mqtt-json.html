@@ -1,0 +1,94 @@
+<!--
+  Copyright JS Foundation and other contributors, http://js.foundation
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="mqtt-json">
+    <div class="form-row">
+        <label for="node-input-broker"><i class="fa fa-globe"></i> <span data-i18n="mqtt.label.broker"></span></label>
+        <input type="text" id="node-input-broker">
+    </div>
+    <div class="form-row">
+        <label for="node-input-topic"><i class="fa fa-tasks"></i> <span data-i18n="common.label.topic"></span></label>
+        <input type="text" id="node-input-topic" data-i18n="[placeholder]common.label.topic">
+    </div>
+    <div class="form-row">
+        <label for="node-input-qos"><i class="fa fa-empire"></i> <span data-i18n="mqtt.label.qos"></span></label>
+        <select id="node-input-qos" style="width:125px !important">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]common.label.name">
+    </div>
+     <div class="form-row">
+        <label for="node-input-property"><i class="fa fa-tasks"></i> <span>Payload Property</span></label>
+        <input type="text" id="node-input-property" placeholder="Payload Property">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="mqtt-json">
+<p>Connects to a MQTT broker and subscribes to messages from the specified topic.</p>
+    <h3>JSON Parse</h3>
+    <p>If the incoming payload is a JSON encoded object it will get parsed. Leave Property empty to get the whole
+    object or select a specific attributes that will be outputted as payload. Nested properties can be accessed with
+    dot-notation.</p>
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+       <dt>payload <span class="property-type">string | buffer</span></dt>
+       <dd>a string unless detected as a binary buffer.</dd>
+       <dt>topic <span class="property-type">string</span></dt>
+       <dd>the MQTT topic, uses / as a heirarchy separator.</dd>
+       <dt>qos <span class="property-type">number</span> </dt>
+       <dd>0, fire and forget - 1, at least once - 2, once and once only.</dd>
+       <dt>retain <span class="property-type">boolean</span></dt>
+       <dd>true indicates the message was retained and may be old.</dd>
+    </dl>
+    <h3>Details</h3>
+    The subscription topic can include MQTT wildcards, + for one level, # for multiple levels.</p>
+    <p>This node requires a connection to a MQTT broker to be configured. This is configured by clicking
+    the pencil icon.</p>
+    <p>Several MQTT nodes (in or out) can share the same broker connection if required.</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('mqtt-json', {
+        category: 'input',
+        defaults: {
+            name: {value: ''},
+            topic: {value: '', required: true, validate: RED.validators.regex(/^(#$|(\+|[^+#]*)(\/(\+|[^+#]*))*(\/(\+|#|[^+#]*))?$)/)},
+            property: {value: ''},
+            qos: {value: '0'},
+            broker: {type: 'mqtt-broker', required: true}
+        },
+        color: '#d8bfd8',
+        inputs: 0,
+        outputs: 1,
+        icon: 'bridge.png',
+        paletteLabel: 'mqtt json',
+        label() {
+            return this.name || this.topic || 'mqtt json';
+        },
+        labelStyle() {
+            return this.name ? 'node_label_italic' : '';
+        },
+        oneditprepare() {
+            if (this.qos === undefined) {
+                $('#node-input-qos').val('0');
+            }
+        }
+    });
+</script>

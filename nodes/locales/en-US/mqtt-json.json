@@ -1,0 +1,73 @@
+{
+    "common": {
+        "label": {
+            "payload": "Payload",
+            "topic": "Topic",
+            "name": "Name",
+            "username": "Username",
+            "password": "Password",
+            "property": "Property"
+        },
+        "status": {
+            "connected": "connected",
+            "not-connected": "not connected",
+            "disconnected": "disconnected",
+            "connecting": "connecting",
+            "error": "error",
+            "ok": "OK"
+        },
+        "notification": {
+            "error": "<strong>Error</strong>: __message__",
+            "errors": {
+                "not-deployed": "node not deployed",
+                "no-response": "no response from server",
+                "unexpected": "unexpected error (__status__) __message__"
+            }
+        },
+        "errors": {
+            "nooverride": "Warning: msg properties can no longer override set node properties. See bit.ly/nr-override-msg-props"
+        }
+    },
+    "mqtt": {
+        "label": {
+            "broker": "Server",
+            "example": "e.g. localhost",
+            "qos": "QoS",
+            "clientid": "Client ID",
+            "port": "Port",
+            "keepalive": "Keep alive time (s)",
+            "cleansession": "Use clean session",
+            "use-tls": "Enable secure (SSL/TLS) connection",
+            "tls-config":"TLS Configuration",
+            "verify-server-cert":"Verify server certificate",
+            "compatmode": "Use legacy MQTT 3.1 support"
+        },
+        "tabs-label": {
+            "connection": "Connection",
+            "security": "Security",
+            "will": "Will Message",
+            "birth": "Birth Message"
+        },
+        "placeholder": {
+            "clientid": "Leave blank for auto generated",
+            "clientid-nonclean":"Must be set for non-clean sessions",
+            "will-topic": "Leave blank to disable will message",
+            "birth-topic": "Leave blank to disable birth message"
+        },
+        "state": {
+            "connected": "Connected to broker: __broker__",
+            "disconnected": "Disconnected from broker: __broker__",
+            "connect-failed": "Connection failed to broker: __broker__"
+        },
+        "retain": "Retain",
+        "true": "true",
+        "false": "false",
+        "tip": "Tip: Leave topic, qos or retain blank if you want to set them via msg properties.",
+        "errors": {
+            "not-defined": "topic not defined",
+            "missing-config": "missing broker configuration",
+            "invalid-topic": "Invalid topic specified",
+            "nonclean-missingclientid": "No client ID set, using clean session"
+        }
+    }
+}
