@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-mqtt-json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node-RED MQTT input node that parses JSON payloads",
   "main": "none",
   "keywords": [
@@ -18,7 +18,7 @@
     "url": "git+https://github.com/hobbyquaker/node-red-contrib-mqtt-json.git"
   },
   "author": "Sebastian Raff <hobbyquaker@gmail.com>",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "bugs": {
     "url": "https://github.com/hobbyquaker/node-red-contrib-mqtt-json/issues"
   },
